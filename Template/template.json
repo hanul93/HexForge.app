@@ -1,0 +1,15 @@
+{
+  "Archive": [
+    "cab",
+    "zip"
+  ],
+  "Executable": {
+    "Debug": [
+      "pdb (Microsoft PDB)",
+      "pdb (Portable PDB)"
+    ]
+  },
+  "Image": [
+    "jpg"
+  ]
+}
