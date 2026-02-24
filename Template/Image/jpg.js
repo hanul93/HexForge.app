@@ -558,8 +558,6 @@ async function parseAPPGeneric(label) {
 const fileSize = await hf.fileSize
 let segmentCount = 0
 
-hf.template.beginStruct('JPGFILE')
-
 while (hf.template.tell() < fileSize) {
   // Skip optional 0xFF padding bytes
   while (hf.template.tell() < fileSize - 1) {
@@ -587,10 +585,9 @@ while (hf.template.tell() < fileSize) {
       await hf.template.addField('marker', 'u16', { le: false, enumMap: M_ID_MAP, color: '#ff4444' })
     hf.template.endStruct()
     hf.log('End of Image (EOI)')
-    // Remaining data after EOI
     const remaining = fileSize - hf.template.tell()
     if (remaining > 0) {
-      await hf.template.addField('trailingData', `bytes:${remaining}`, { color: '#808080' })
+      hf.warn('Overlay data: ' + remaining + ' byte(s) after EOI marker')
     }
     break
   } else if (marker === 0xFFDA) {
@@ -636,8 +633,6 @@ while (hf.template.tell() < fileSize) {
     break
   }
 }
-
-hf.template.endStruct()
 
 await hf.template.end()
 hf.log(`JPEG template applied: ${segmentCount} segments parsed`)
