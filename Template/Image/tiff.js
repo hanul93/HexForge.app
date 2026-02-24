@@ -18,7 +18,7 @@ var isle = (hdr[0] === 0x49 && hdr[1] === 0x49); // II = little-endian
 var isbe = (hdr[0] === 0x4D && hdr[1] === 0x4D); // MM = big-endian
 
 if (!isle && !isbe) {
-    hf.error("Invalid TIFF byte order mark (expected II or MM)");
+    hf.error("Not a TIFF file (expected byte order II or MM)");
     await hf.template.end();
     throw new Error("Not a valid TIFF");
 }
@@ -26,6 +26,13 @@ if (!isle && !isbe) {
 function u16(buf, off) {
     if (isle) return buf[off] | (buf[off + 1] << 8);
     return (buf[off] << 8) | buf[off + 1];
+}
+
+var magic = u16(hdr, 2);
+if (magic !== 42 && magic !== 43) {
+    hf.error("Not a TIFF file (expected magic 42 or 43, got " + magic + ")");
+    await hf.template.end();
+    throw new Error("Not a valid TIFF");
 }
 function u32(buf, off) {
     if (isle) return (buf[off] | (buf[off + 1] << 8) | (buf[off + 2] << 16) | (buf[off + 3] << 24)) >>> 0;
@@ -36,16 +43,7 @@ function i32(buf, off) {
     return v > 0x7FFFFFFF ? v - 0x100000000 : v;
 }
 
-// Check magic
-var magic = u16(hdr, 2);
 var isBigTiff = (magic === 43);
-if (magic !== 42 && magic !== 43) {
-    hf.error("Invalid TIFF magic (expected 42 or 43, got " + magic + ")");
-    await hf.template.end();
-    throw new Error("Not a valid TIFF");
-}
-
-// BigTIFF uses 8-byte offsets — we only support standard TIFF for now
 if (isBigTiff) {
     hf.log("BigTIFF detected (64-bit offsets) — parsing header only");
 }

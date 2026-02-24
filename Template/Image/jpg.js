@@ -558,6 +558,14 @@ async function parseAPPGeneric(label) {
 const fileSize = await hf.fileSize
 let segmentCount = 0
 
+// Validate JPEG signature
+var magic = await readU16BE(0)
+if (magic !== 0xFFD8) {
+  hf.error('Not a JPEG file (expected FFD8, got ' + magic.toString(16).toUpperCase() + ')')
+  await hf.template.end()
+  throw new Error('Not a valid JPEG')
+}
+
 while (hf.template.tell() < fileSize) {
   // Skip optional 0xFF padding bytes
   while (hf.template.tell() < fileSize - 1) {

@@ -11,6 +11,7 @@
   },
   "Image": [
     "jpg",
+    "png",
     "tiff"
   ]
 }
