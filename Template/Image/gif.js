@@ -372,14 +372,6 @@ while (pos < fileSize && blockCount < 5000) {
 if (gifEnd < fileSize) {
     var overlaySize = fileSize - gifEnd;
     hf.warn("Overlay data: " + overlaySize + " byte(s) after GIF end");
-    var oSigBuf = await hf.read(gifEnd, Math.min(4, overlaySize));
-    var oSig = "";
-    for (var i = 0; i < oSigBuf.length; i++) oSig += String.fromCharCode(oSigBuf[i]);
-    if (oSig.slice(0, 2) === "MZ") hf.warn("  Overlay appears to be a PE (MZ) executable");
-    else if (oSig === "\x89PNG") hf.warn("  Overlay appears to be a PNG image");
-    else if (oSig.slice(0, 2) === "\xFF\xD8") hf.warn("  Overlay appears to be a JPEG image");
-    else if (oSig === "%PDF") hf.warn("  Overlay appears to be a PDF document");
-    else if (oSig === "PK\x03\x04") hf.warn("  Overlay appears to be a ZIP archive");
 }
 
 // ──────────────────────────────────────────────

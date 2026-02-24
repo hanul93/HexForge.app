@@ -348,15 +348,6 @@ while (pos + 12 <= fileSize && chunkCount < 2000) {
 if (pngEnd < fileSize) {
     var overlaySize = fileSize - pngEnd;
     hf.warn("Overlay data: " + overlaySize + " byte(s) after IEND chunk");
-    var sigBuf = await hf.read(pngEnd, Math.min(4, overlaySize));
-    var oSig = "";
-    for (var i = 0; i < sigBuf.length; i++) oSig += String.fromCharCode(sigBuf[i]);
-    if (oSig.slice(0, 2) === "MZ") hf.warn("  Overlay appears to be a PE (MZ) executable");
-    else if (oSig === "\x89PNG") hf.warn("  Overlay appears to be a PNG image");
-    else if (oSig.slice(0, 2) === "\xFF\xD8") hf.warn("  Overlay appears to be a JPEG image");
-    else if (oSig === "%PDF") hf.warn("  Overlay appears to be a PDF document");
-    else if (oSig === "PK\x03\x04") hf.warn("  Overlay appears to be a ZIP archive");
-    else if (oSig === "Rar!") hf.warn("  Overlay appears to be a RAR archive");
 }
 
 // ──────────────────────────────────────────────

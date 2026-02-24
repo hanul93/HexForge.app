@@ -438,16 +438,6 @@ if (tiffEnd < fileSize) {
     var overlaySize = fileSize - tiffEnd;
     hf.warn("Overlay data detected after TIFF end at 0x" + tiffEnd.toString(16) +
             " (" + overlaySize.toLocaleString() + " bytes)");
-    // Identify overlay signature
-    var sigBuf = await hf.read(tiffEnd, Math.min(4, fileSize - tiffEnd));
-    var sig = "";
-    for (var si = 0; si < sigBuf.length; si++) sig += String.fromCharCode(sigBuf[si]);
-    if (sig.slice(0, 2) === "MZ") hf.warn("  Overlay appears to be a PE (MZ) executable");
-    else if (sig === "\x89PNG") hf.warn("  Overlay appears to be a PNG image");
-    else if (sig.slice(0, 2) === "\xFF\xD8") hf.warn("  Overlay appears to be a JPEG image");
-    else if (sig === "%PDF") hf.warn("  Overlay appears to be a PDF document");
-    else if (sig === "PK\x03\x04") hf.warn("  Overlay appears to be a ZIP archive");
-    else if (sig === "Rar!") hf.warn("  Overlay appears to be a RAR archive");
 }
 
 // ══════════════════════════════════════════════

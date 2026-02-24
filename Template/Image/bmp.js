@@ -285,14 +285,6 @@ if (bfSize > bmpEnd && bfSize <= fileSize) bmpEnd = bfSize;
 if (bmpEnd < fileSize) {
     var overlaySize = fileSize - bmpEnd;
     hf.warn("Overlay data: " + overlaySize + " byte(s) after BMP end");
-    var oSigBuf = await hf.read(bmpEnd, Math.min(4, overlaySize));
-    var oSig = "";
-    for (var i = 0; i < oSigBuf.length; i++) oSig += String.fromCharCode(oSigBuf[i]);
-    if (oSig.slice(0, 2) === "MZ") hf.warn("  Overlay appears to be a PE (MZ) executable");
-    else if (oSig === "\x89PNG") hf.warn("  Overlay appears to be a PNG image");
-    else if (oSig.slice(0, 2) === "\xFF\xD8") hf.warn("  Overlay appears to be a JPEG image");
-    else if (oSig === "%PDF") hf.warn("  Overlay appears to be a PDF document");
-    else if (oSig === "PK\x03\x04") hf.warn("  Overlay appears to be a ZIP archive");
 }
 
 // ──────────────────────────────────────────────
