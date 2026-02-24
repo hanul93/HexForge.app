@@ -10,6 +10,7 @@
     ]
   },
   "Image": [
+    "bmp",
     "gif",
     "jpg",
     "png",
