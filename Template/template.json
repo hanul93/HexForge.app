@@ -7,6 +7,10 @@
     "Debug": [
       "pdb (Microsoft PDB)",
       "pdb (Portable PDB)"
+    ],
+    "__files__": [
+      "pe (with viz)",
+      "pe"
     ]
   },
   "Image": [
