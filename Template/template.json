@@ -18,6 +18,8 @@
     "xls (WorkBook)"
   ],
   "Executable": [
+    "elf (with viz)",
+    "elf",
     "pe (with viz)",
     "pe"
   ],
