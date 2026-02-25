@@ -12,6 +12,11 @@
     "pdb (Microsoft PDB)",
     "pdb (Portable PDB)"
   ],
+  "Document": [
+    "doc (WordDocument)",
+    "ppt (PowerPoint Document)",
+    "xls (WorkBook)"
+  ],
   "Executable": [
     "pe (with viz)",
     "pe"
