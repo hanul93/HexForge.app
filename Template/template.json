@@ -1,6 +1,11 @@
 {
   "Archive": [
+    "7z",
+    "alz",
     "cab",
+    "egg",
+    "rar",
+    "tar",
     "zip"
   ],
   "Debug": [
