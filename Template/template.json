@@ -3,16 +3,14 @@
     "cab",
     "zip"
   ],
-  "Executable": {
-    "Debug": [
-      "pdb (Microsoft PDB)",
-      "pdb (Portable PDB)"
-    ],
-    "__files__": [
-      "pe (with viz)",
-      "pe"
-    ]
-  },
+  "Debug": [
+    "pdb (Microsoft PDB)",
+    "pdb (Portable PDB)"
+  ],
+  "Executable": [
+    "pe (with viz)",
+    "pe"
+  ],
   "Image": [
     "bmp",
     "gif",
