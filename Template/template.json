@@ -14,6 +14,7 @@
   ],
   "Document": [
     "doc (WordDocument)",
+    "ole2 (doc with viz)",
     "ppt (PowerPoint Document)",
     "xls (WorkBook)"
   ],
